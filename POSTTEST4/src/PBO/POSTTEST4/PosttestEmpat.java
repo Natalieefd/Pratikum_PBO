@@ -85,7 +85,6 @@ public class PosttestEmpat {
     }
     
     static void addData(int pilihan) throws IOException{
-        boolean check, checked;
         
         //add data peserta
         if (pilihan == 1){
@@ -98,16 +97,15 @@ public class PosttestEmpat {
                 String nama = bfr.readLine();
                 System.out.print("\t\tInput angkatan peserta         : ");
                 int angkatan = Integer.parseInt(bfr.readLine());
-                System.out.println("\n\t\t*jika mahasiswa silahkan input semester*");
-                System.out.print("\t\tInput kelas peserta            : ");
-                int kelas = Integer.parseInt(bfr.readLine());
+                System.out.print("\t\tInput semester peserta         : ");
+                int semester = Integer.parseInt(bfr.readLine());
                 System.out.print("\t\tInput kategori lomba           : ");
                 String lomba = bfr.readLine();
                 System.out.print("\t\tInput asal instansi peserta    : ");
                 String asalInstansi = bfr.readLine();
                 System.out.println("");
 
-                peserta.add(new DataPeserta(nomorPeserta, nama, angkatan, kelas,
+                peserta.add(new DataPeserta(nomorPeserta, nama, angkatan, semester,
                         lomba, asalInstansi));
 
                 jdl.newLine();
@@ -131,39 +129,28 @@ public class PosttestEmpat {
             } else {
                 readData(1);
                 System.out.print("\t\tPilih nomor data peserta » ");
+
                 try {
                     int indexPeserta = Integer.parseInt(bfr.readLine());
 
-                    if (pemenang.size() > 0){
-                        for(int i = 0; i < pemenang.size(); i++){
-                            if (pemenang.get(i).getNomorPeserta() == indexPeserta){
-                                jdl.newLine();
-                                System.out.println("\n\t\t! DATA PESERTA SUDAH ADA !");
-                                jdl.newLine();
-                                check = false;
-                            }
-                        }
-                        if (check = false){
+                    int nomorPeserta = peserta.get(indexPeserta-1).getNomorPeserta();
+                    String nama = peserta.get(indexPeserta-1).getNama();
+                    int angkatan = peserta.get(indexPeserta-1).getAngkatan();
+                    int semester = peserta.get(indexPeserta-1).getSemester();
+                    String lomba = peserta.get(indexPeserta-1).getLomba();
+                    String asalInstansi = peserta.get(indexPeserta-1).getAsalInstansi();
+                    System.out.print("\t\tInput kategori juara       : ");
+                    String kategoriJuara = bfr.readLine();
+                    System.out.print("\t\tInput peringkat peserta    : ");
+                    int peringkat = Integer.parseInt(bfr.readLine());
+                    System.out.println("");
 
-                        int nomorPeserta = peserta.get(indexPeserta-1).getNomorPeserta();
-                        String nama = peserta.get(indexPeserta-1).getNama();
-                        int angkatan = peserta.get(indexPeserta-1).getAngkatan();
-                        int kelas = peserta.get(indexPeserta-1).getKelas();
-                        String lomba = peserta.get(indexPeserta-1).getLomba();
-                        String asalInstansi = peserta.get(indexPeserta-1).getAsalInstansi();
-                        System.out.print("\t\tInput kategori juara       : ");
-                        String kategoriJuara = bfr.readLine();
-                        System.out.print("\t\tInput peringkat peserta    : ");
-                        int peringkat = Integer.parseInt(bfr.readLine());
-                        System.out.println("");
+                    pemenang.add(new DataPemenang(nomorPeserta, nama, angkatan,
+                            semester, lomba, asalInstansi, kategoriJuara, peringkat));
+                    jdl.newLine();
+                    jdl.berhasil();
+                    jdl.newLine();
 
-                        pemenang.add(new DataPemenang(nomorPeserta, nama, angkatan,
-                                kelas, lomba, asalInstansi, kategoriJuara, peringkat));
-                        jdl.newLine();
-                        jdl.berhasil();
-                        jdl.newLine();
-                        }
-                    }
                 } catch (Exception e){
                     jdl.newLine();
                     exp.errorHandling();
@@ -183,36 +170,26 @@ public class PosttestEmpat {
             } else {
                 readData(1);
                 System.out.print("\t\tPilih nomor data peserta » ");
+
                 try {
                     int indexPeserta = Integer.parseInt(bfr.readLine());
 
-                    if (finalis.size() > 0){
-                        for(int i = 0; i < finalis.size(); i++){
-                            if (finalis.get(i).getNomorPeserta() == indexPeserta){
-                                jdl.newLine();
-                                System.out.println("\n\t\t! DATA PESERTA SUDAH ADA !");
-                                jdl.newLine();
-                                check = false;
-                            }
-                        }
-                        if (check = false){
-                        int nomorPeserta = peserta.get(indexPeserta-1).getNomorPeserta();
-                        String nama = peserta.get(indexPeserta-1).getNama();
-                        int angkatan = peserta.get(indexPeserta-1).getAngkatan();
-                        int kelas = peserta.get(indexPeserta-1).getKelas();
-                        String lomba = peserta.get(indexPeserta-1).getLomba();
-                        String asalInstansi = peserta.get(indexPeserta-1).getAsalInstansi();
-                        System.out.print("\t\tInput babak finalis       : ");
-                        String tingkatBabak = bfr.readLine();
-                        System.out.println("");
+                    int nomorPeserta = peserta.get(indexPeserta-1).getNomorPeserta();
+                    String nama = peserta.get(indexPeserta-1).getNama();
+                    int angkatan = peserta.get(indexPeserta-1).getAngkatan();
+                    int semester = peserta.get(indexPeserta-1).getSemester();
+                    String lomba = peserta.get(indexPeserta-1).getLomba();
+                    String asalInstansi = peserta.get(indexPeserta-1).getAsalInstansi();
+                    System.out.print("\t\tInput babak finalis       : ");
+                    String tingkatBabak = bfr.readLine();
+                    System.out.println("");
 
-                        finalis.add(new DataFinalis(nomorPeserta, nama, angkatan, 
-                                kelas, lomba, asalInstansi, tingkatBabak));
-                        jdl.newLine();
-                        jdl.berhasil();
-                        jdl.newLine();
-                        }
-                    }
+                    finalis.add(new DataFinalis(nomorPeserta, nama, angkatan, 
+                            semester, lomba, asalInstansi, tingkatBabak));
+                    jdl.newLine();
+                    jdl.berhasil();
+                    jdl.newLine();
+
                 } catch (Exception e){
                     jdl.newLine();
                     exp.errorHandling();
@@ -226,47 +203,7 @@ public class PosttestEmpat {
             jdl.newLine();
         }
     }
-    
-    public static boolean cekData(int pilihan, int indexPeserta) throws IOException{
-        boolean checked;
         
-        //cek data pemenang
-        if (pilihan == 2){
-            if (pemenang.size() > 0){
-                for(int i = 0; i < pemenang.size(); i++){
-                    if (pemenang.get(i).getNomorPeserta() == indexPeserta){
-                        jdl.newLine();
-                        System.out.println("\n\t\t! DATA PESERTA SUDAH ADA !");
-                        jdl.newLine();
-                        checked = false;
-                        return checked;
-                    } else {
-                        checked = true;
-                        return checked;
-                    }
-                }
-            }
-            
-        // cek data finalis
-        } else if (pilihan == 3){
-            if (finalis.size() > 0){
-                for(int i = 0; i < finalis.size(); i++){
-                    if (finalis.get(i).getNomorPeserta() == indexPeserta){
-                        jdl.newLine();
-                        System.out.println("\n\t\t! DATA PESERTA SUDAH ADA !");
-                        jdl.newLine();
-                        checked = false;
-                        return checked;
-                    } else {
-                        checked = true;
-                        return checked;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-    
     static void readData(int pilihan) throws IOException {
         
         // read data peserta
@@ -287,7 +224,7 @@ public class PosttestEmpat {
                     System.out.println("\t\t Angkatan               : " 
                                         +peserta.get(i).getAngkatan());
                     System.out.println("\t\t Kelas                  : " 
-                                        +peserta.get(i).getKelas());
+                                        +peserta.get(i).getSemester());
                     System.out.println("\t\t Lomba yang diikuti     : " 
                                         +peserta.get(i).getLomba());
                     System.out.println("\t\t Asal Instansi peserta  : " 
@@ -315,7 +252,7 @@ public class PosttestEmpat {
                     System.out.println("\t\t Angkatan               : " 
                                         +pemenang.get(i).getAngkatan());
                     System.out.println("\t\t Kelas                  : " 
-                                        +pemenang.get(i).getKelas());
+                                        +pemenang.get(i).getSemester());
                     System.out.println("\t\t Lomba yang diikuti     : " 
                                         +pemenang.get(i).getLomba());
                     System.out.println("\t\t Asal Instansi Peserta  : " 
@@ -347,7 +284,7 @@ public class PosttestEmpat {
                     System.out.println("\t\t Angkatan               : " 
                                         +finalis.get(i).getAngkatan());
                     System.out.println("\t\t Kelas                  : " 
-                                        +finalis.get(i).getKelas());
+                                        +finalis.get(i).getSemester());
                     System.out.println("\t\t Lomba yang diikuti     : " 
                                         +finalis.get(i).getLomba());
                     System.out.println("\t\t Asal Instansi Peserta  : " 
@@ -381,7 +318,7 @@ public class PosttestEmpat {
                     System.out.print("\n\t\tIngin mengubah data nama?\n\t\t[Yes»1/No»2] » ");
                     int ubahNama = Integer.parseInt(bfr.readLine());
                     if(ubahNama == 1){
-                        System.out.print("\n\t\tInput nama lengkap peserta  : ");
+                        System.out.print("\n\t\tInput nama lengkap peserta   : ");
                         String newNama = bfr.readLine();
                         peserta.get(indexUp-1).setNama(newNama);  
                     } else if (ubahNama == 2){
@@ -391,21 +328,20 @@ public class PosttestEmpat {
                     int ubahAngkatan = Integer.parseInt(bfr.readLine());
 
                     if(ubahAngkatan == 1){
-                        System.out.print("\n\t\tInput angkatan data peserta       : ");
+                        System.out.print("\n\t\tInput angkatan data peserta  : ");
                         int newAngkatan = Integer.parseInt(bfr.readLine());
                         peserta.get(indexUp-1).setAngkatan(newAngkatan);
                     } else if (ubahAngkatan == 2){
                     }
 
-                    System.out.print("\n\t\tIngin mengubah data kelas?\n\t\t[Yes»1/No»2] » ");
-                    int ubahKelas = Integer.parseInt(bfr.readLine());
+                    System.out.print("\n\t\tIngin mengubah data semester peserta?\n\t\t[Yes»1/No»2] » ");
+                    int ubahSemester = Integer.parseInt(bfr.readLine());
 
-                    if(ubahKelas == 1){
-                        System.out.println("\n\t\t*jika mahasiswa silahkan input semester*");
-                        System.out.print("\t\tInput kelas peserta          : ");
+                    if(ubahSemester == 1){
+                        System.out.print("\n\t\tInput kelas peserta          : ");
                         int newKelas = Integer.parseInt(bfr.readLine());
-                        peserta.get(indexUp-1).setKelas(newKelas);
-                    } else if (ubahKelas == 2){
+                        peserta.get(indexUp-1).setSemester(newKelas);
+                    } else if (ubahSemester == 2){
                     }
 
                     System.out.print("\n\t\tIngin mengubah data lomba?\n\t\t[Yes»1/No»2] » ");
@@ -442,8 +378,8 @@ public class PosttestEmpat {
             
         // update data pemenang
         } else if(pilihan == 2){
-            if (peserta.size() == 0){
-                System.out.println("\t! MOHON MASUKKAN DATA PESERTA TERLEBIH DAHULU !");
+            if (pemenang.size() == 0){
+                System.out.println("\t! MOHON MASUKKAN DATA PEMENANG TERLEBIH DAHULU !");
             } else {
                 System.out.print("\t\tInput nomor data yang ingin diubah » ");
                 try {
@@ -486,8 +422,8 @@ public class PosttestEmpat {
             
         // update data finalis
         } else if(pilihan == 3){
-            if (peserta.size() == 0){
-                System.out.println("\t! MOHON MASUKKAN DATA PESERTA TERLEBIH DAHULU !");
+            if (finalis.size() == 0){
+                System.out.println("\t! MOHON MASUKKAN DATA FINALIS TERLEBIH DAHULU !");
             } else {
                 System.out.print("\t\tInput nomor data yang ingin diubah » ");
                 try {
@@ -531,7 +467,7 @@ public class PosttestEmpat {
             System.out.print("\t\tInput nomor data yang ingin dihapus » ");
             int indexDel = Integer.parseInt(bfr.readLine());
             peserta.remove(indexDel-1);
-
+            
             jdl.newLine();
             jdl.berhasil();
             jdl.newLine();
